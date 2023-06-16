@@ -577,6 +577,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9d6f2aa4d0537bcc1c74df8755072bd31c1ef1a3a1b85a68e8404a8c353b7b8b"
 
 [[package]]
+name = "core2"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b49ba7ef1ad6107f8824dbe97de947cbaac53c44e7f9756a1fba0d37c1eec505"
+dependencies = [
+ "memchr",
+]
+
+[[package]]
 name = "cpp_demangle"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3180,6 +3189,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "thiserror_core2"
+version = "2.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "39f6f9e5af7ca0861a5eae30fe6e95405338f0e92c54424bb66160b01e682243"
+dependencies = [
+ "core2",
+ "thiserror_core2-impl",
+]
+
+[[package]]
+name = "thiserror_core2-impl"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9c64183aeaddf559344af98f444cd2ea6685ea0136a59c17587a2c759362e523"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.92",
+]
+
+[[package]]
 name = "thread_local"
 version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4216,9 +4246,11 @@ dependencies = [
 name = "wasmtime-types"
 version = "11.0.0"
 dependencies = [
+ "core2",
  "cranelift-entity",
  "serde",
  "thiserror",
+ "thiserror_core2",
  "wasmparser 0.107.0",
 ]
 

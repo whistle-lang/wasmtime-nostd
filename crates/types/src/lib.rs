@@ -1,5 +1,7 @@
 //! Internal dependency of Wasmtime and Cranelift that defines types for
 //! WebAssembly.
+#![cfg_attr(not(feature = "std"), no_std)]
+
 
 pub use wasmparser;
 
@@ -9,6 +11,8 @@ use std::fmt;
 
 mod error;
 pub use error::*;
+
+extern crate alloc;
 
 /// WebAssembly value type -- equivalent of `wasmparser`'s Type.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]

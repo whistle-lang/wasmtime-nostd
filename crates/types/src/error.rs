@@ -1,4 +1,11 @@
+#[cfg(not(feature = "std"))]
+use core2;
+#[cfg(feature = "std")]
 use thiserror::Error;
+#[cfg(not(feature = "std"))]
+use thiserror_core2::Error;
+
+use alloc::string::String;
 
 /// A WebAssembly translation error.
 ///
