@@ -1,5 +1,6 @@
 use crate::fact::core_types::CoreTypes;
 use crate::MemoryIndex;
+use alloc::{string::String, format};
 use serde::{Deserialize, Serialize};
 use wasm_encoder::{EntityType, ValType};
 

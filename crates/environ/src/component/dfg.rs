@@ -29,10 +29,13 @@
 
 use crate::component::*;
 use crate::{EntityIndex, EntityRef, PrimaryMap, SignatureIndex};
+use alloc::boxed::Box;
+use alloc::string::String;
+use alloc::vec::Vec;
 use indexmap::IndexMap;
-use std::collections::HashMap;
-use std::hash::Hash;
-use std::ops::Index;
+use hashbrown::HashMap;
+use core::hash::Hash;
+use core::ops::Index;
 
 #[derive(Default)]
 #[allow(missing_docs)]

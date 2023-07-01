@@ -1,4 +1,7 @@
-use std::cell::RefCell;
+use core::cell::RefCell;
+
+use alloc::{vec::Vec, boxed::Box, slice};
+
 
 /// Small data structure to help extend the lifetime of a slice to a higher
 /// scope.
@@ -52,6 +55,6 @@ impl<T> ScopeVec<T> {
         //
         // This all means that it should be safe to return a mutable slice of
         // all of `data` after the data has been pushed onto our internal list.
-        unsafe { std::slice::from_raw_parts_mut(ptr, len) }
+        unsafe { slice::from_raw_parts_mut(ptr, len) }
     }
 }

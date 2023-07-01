@@ -1,18 +1,20 @@
 //! Internal dependency of Wasmtime and Cranelift that defines types for
 //! WebAssembly.
-#![cfg_attr(not(feature = "std"), no_std)]
+// #![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 
+
+extern crate alloc;
 
 pub use wasmparser;
 
 use cranelift_entity::entity_impl;
 use serde::{Deserialize, Serialize};
-use std::fmt;
-
+use core::fmt;
+use alloc::boxed::Box;
 mod error;
 pub use error::*;
 
-extern crate alloc;
 
 /// WebAssembly value type -- equivalent of `wasmparser`'s Type.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]

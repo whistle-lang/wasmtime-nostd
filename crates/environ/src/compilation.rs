@@ -1,22 +1,29 @@
 //! A `Compilation` contains the compiled function bodies for a WebAssembly
 //! module.
 
+use core::any::Any;
+
 use crate::obj;
 use crate::{
     DefinedFuncIndex, FilePos, FuncIndex, FunctionBodyData, ModuleTranslation, ModuleTypes,
     PrimaryMap, StackMap, Tunables, WasmError, WasmFuncType,
 };
+use alloc::borrow::Cow;
+use alloc::boxed::Box;
+use alloc::collections::BTreeMap;
+use alloc::fmt;
+use alloc::string::String;
+use alloc::sync::Arc;
+use alloc::vec::Vec;
 use anyhow::Result;
 use object::write::{Object, SymbolId};
 use object::{Architecture, BinaryFormat, FileFlags};
 use serde::{Deserialize, Serialize};
-use std::any::Any;
-use std::borrow::Cow;
-use std::collections::BTreeMap;
-use std::fmt;
-use std::path;
-use std::sync::Arc;
+#[cfg(feature = "std")]
 use thiserror::Error;
+#[cfg(not(feature = "std"))]
+use thiserror_core2::Error;
+
 
 /// Information about a function, such as trap information, address map,
 /// and stack maps.
@@ -71,7 +78,7 @@ pub enum CompileError {
 /// In theory, this could just be Cranelift's `CacheKvStore` trait, but it is not as we want to
 /// make sure that wasmtime isn't too tied to Cranelift internals (and as a matter of fact, we
 /// can't depend on the Cranelift trait here).
-pub trait CacheStore: Send + Sync + std::fmt::Debug {
+pub trait CacheStore: Send + Sync + fmt::Debug {
     /// Try to retrieve an arbitrary cache key entry, and returns a reference to bytes that were
     /// inserted via `Self::insert` before.
     fn get(&self, key: &[u8]) -> Option<Cow<[u8]>>;
@@ -91,6 +98,7 @@ pub trait CompilerBuilder: Send + Sync + fmt::Debug {
     fn target(&mut self, target: target_lexicon::Triple) -> Result<()>;
 
     /// Enables clif output in the directory specified.
+    #[cfg(feature = "std")]
     fn clif_dir(&mut self, _path: &path::Path) -> Result<()> {
         anyhow::bail!("clif output not supported");
     }

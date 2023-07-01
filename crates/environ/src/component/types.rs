@@ -3,13 +3,16 @@ use crate::{
     EntityType, ModuleTypes, ModuleTypesBuilder, PrimaryMap, SignatureIndex, TypeConvert,
     WasmHeapType,
 };
+use alloc::boxed::Box;
+use alloc::string::{ToString, String};
+use alloc::vec::Vec;
 use anyhow::{bail, Result};
 use cranelift_entity::EntityRef;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::hash::Hash;
-use std::ops::Index;
+use hashbrown::HashMap;
+use core::hash::Hash;
+use core::ops::Index;
 use wasmparser::{
     ComponentAlias, ComponentOuterAliasKind, ComponentTypeDeclaration, InstanceTypeDeclaration,
 };
@@ -264,7 +267,7 @@ impl ComponentTypes {
 
 macro_rules! impl_index {
     ($(impl Index<$ty:ident> for ComponentTypes { $output:ident => $field:ident })*) => ($(
-        impl std::ops::Index<$ty> for ComponentTypes {
+        impl core::ops::Index<$ty> for ComponentTypes {
             type Output = $output;
             fn index(&self, idx: $ty) -> &$output {
                 &self.$field[idx]

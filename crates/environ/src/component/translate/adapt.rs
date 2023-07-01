@@ -118,7 +118,8 @@
 use crate::component::translate::*;
 use crate::fact;
 use crate::EntityType;
-use std::collections::HashSet;
+use alloc::format;
+use hashbrown::HashSet;
 use wasmparser::WasmFeatures;
 
 /// Metadata information about a fused adapter.

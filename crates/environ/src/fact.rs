@@ -25,8 +25,11 @@ use crate::component::{
 };
 use crate::fact::transcode::Transcoder;
 use crate::{EntityRef, FuncIndex, GlobalIndex, MemoryIndex, PrimaryMap};
-use std::borrow::Cow;
-use std::collections::HashMap;
+use alloc::borrow::Cow;
+use alloc::format;
+use alloc::string::{ToString, String};
+use alloc::vec::Vec;
+use hashbrown::HashMap;
 use wasm_encoder::*;
 
 mod core_types;

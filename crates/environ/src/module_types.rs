@@ -1,7 +1,8 @@
+use core::ops::Index;
+
 use crate::{PrimaryMap, SignatureIndex, WasmFuncType};
+use hashbrown::HashMap;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::ops::Index;
 
 /// All types used in a core wasm module.
 ///

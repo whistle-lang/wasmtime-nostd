@@ -2,7 +2,8 @@
 //! `get_global`, `set_global`, `memory.size`, `memory.grow`, `call_indirect` that hardcode in
 //! the translation the base addresses of regions of memory that will hold the globals, tables and
 //! linear memories.
-
+#![cfg_attr(not(feature = "std"), no_std)]
+#![feature(error_in_core)]
 #![deny(missing_docs, trivial_numeric_casts, unused_extern_crates)]
 #![warn(unused_import_braces)]
 #![cfg_attr(feature = "clippy", plugin(clippy(conf_file = "../../clippy.toml")))]
@@ -36,6 +37,8 @@ mod stack_map;
 mod trap_encoding;
 mod tunables;
 mod vmoffsets;
+
+extern crate alloc;
 
 pub use crate::address_map::*;
 pub use crate::builtin::*;

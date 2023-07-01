@@ -1,11 +1,12 @@
 //! Data structures to provide transformation of the source
 
+use core::ops::Range;
+
 use crate::obj::ELF_WASMTIME_ADDRMAP;
+use alloc::vec::Vec;
 use object::write::{Object, StandardSegment};
 use object::{Bytes, LittleEndian, SectionKind, U32Bytes};
 use serde::{Deserialize, Serialize};
-use std::convert::TryFrom;
-use std::ops::Range;
 
 /// Single source location to generated address mapping.
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]

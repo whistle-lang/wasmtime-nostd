@@ -17,5 +17,5 @@ thiserror_core2 = { workspace = true }
 wasmparser = { workspace = true }
 
 [features]
-default = ["std"]
+default = []
 std = ["thiserror"]

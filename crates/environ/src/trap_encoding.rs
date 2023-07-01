@@ -1,9 +1,11 @@
+use core::error;
+use core::ops::Range;
+
 use crate::obj::ELF_WASMTIME_TRAPS;
+use alloc::fmt;
+use alloc::vec::Vec;
 use object::write::{Object, StandardSegment};
 use object::{Bytes, LittleEndian, SectionKind, U32Bytes};
-use std::convert::TryFrom;
-use std::fmt;
-use std::ops::Range;
 
 /// A helper structure to build the custom-encoded section of a wasmtime
 /// compilation image which encodes trap information.
@@ -118,7 +120,7 @@ impl fmt::Display for Trap {
     }
 }
 
-impl std::error::Error for Trap {}
+impl error::Error for Trap {}
 
 impl TrapEncodingBuilder {
     /// Appends trap information about a function into this section.

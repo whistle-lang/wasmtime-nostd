@@ -1,3 +1,4 @@
+use alloc::boxed::Box;
 use serde::{Deserialize, Serialize};
 
 /// A map for determining where live GC references live in a stack frame.

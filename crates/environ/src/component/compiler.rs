@@ -1,8 +1,10 @@
+use core::any::Any;
+
 use crate::component::{Component, ComponentTypes, LowerImport, Transcoder};
 use crate::WasmFuncType;
+use alloc::boxed::Box;
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
-use std::any::Any;
 
 /// A triple of related functions/trampolines variants with differing calling
 /// conventions: `{wasm,array,native}_call`.

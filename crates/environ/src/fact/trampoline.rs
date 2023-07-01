@@ -29,9 +29,11 @@ use crate::fact::{
     Options,
 };
 use crate::{FuncIndex, GlobalIndex};
-use std::collections::HashMap;
-use std::mem;
-use std::ops::Range;
+use alloc::slice;
+use alloc::vec::Vec;
+use hashbrown::HashMap;
+use core::mem;
+use core::ops::Range;
 use wasm_encoder::{BlockType, Encode, Instruction, Instruction::*, MemArg, ValType};
 use wasmtime_component_util::{DiscriminantSize, FlagsSize};
 
@@ -656,7 +658,7 @@ impl Compiler<'_, '_> {
                         .collect::<Vec<_>>();
                     for (ty, local) in tys.iter().zip(locals.into_iter().rev()) {
                         self.instruction(LocalGet(local.idx));
-                        self.stack_set(std::slice::from_ref(ty), local.ty);
+                        self.stack_set(slice::from_ref(ty), local.ty);
                         self.free_temp_local(local);
                     }
                 }
@@ -3137,7 +3139,7 @@ impl TempLocal {
     }
 }
 
-impl std::ops::Drop for TempLocal {
+impl core::ops::Drop for TempLocal {
     fn drop(&mut self) {
         if self.needs_free {
             panic!("temporary local not free'd");

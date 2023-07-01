@@ -18,8 +18,8 @@
 //! This information is currently encoded as a custom section in the wasm
 //! module.
 
-use std::collections::HashMap;
-use std::fmt;
+use hashbrown::HashMap;
+use alloc::{fmt, vec::Vec, string::ToString};
 use wasm_encoder::Encode;
 
 #[derive(Hash, PartialEq, Eq, Copy, Clone)]

@@ -28,7 +28,7 @@ use crate::{
     GlobalIndex, MemoryIndex, Module, TableIndex,
 };
 use cranelift_entity::packed_option::ReservedValue;
-use std::convert::TryFrom;
+use core::convert::TryFrom;
 use wasmtime_types::OwnedMemoryIndex;
 
 #[cfg(target_pointer_width = "32")]
@@ -101,7 +101,7 @@ pub trait PtrSize {
     /// The offset of the `VMContext::runtime_limits` field
     fn vmcontext_runtime_limits(&self) -> u8 {
         u8::try_from(align(
-            u32::try_from(std::mem::size_of::<u32>()).unwrap(),
+            u32::try_from(core::mem::size_of::<u32>()).unwrap(),
             u32::from(self.size()),
         ))
         .unwrap()
@@ -224,7 +224,7 @@ pub trait PtrSize {
     /// Return the offset of `VMNativeCallHostFuncContext::func_ref`.
     fn vmnative_call_host_func_context_func_ref(&self) -> u8 {
         u8::try_from(align(
-            u32::try_from(std::mem::size_of::<u32>()).unwrap(),
+            u32::try_from(core::mem::size_of::<u32>()).unwrap(),
             u32::from(self.size()),
         ))
         .unwrap()
@@ -237,7 +237,7 @@ pub struct HostPtr;
 impl PtrSize for HostPtr {
     #[inline]
     fn size(&self) -> u8 {
-        std::mem::size_of::<usize>() as u8
+        core::mem::size_of::<usize>() as u8
     }
 }
 

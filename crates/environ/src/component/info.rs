@@ -48,6 +48,10 @@
 
 use crate::component::*;
 use crate::{EntityIndex, PrimaryMap, SignatureIndex};
+use alloc::boxed::Box;
+use alloc::format;
+use alloc::string::String;
+use alloc::vec::Vec;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 

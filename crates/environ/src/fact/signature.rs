@@ -2,6 +2,7 @@
 
 use crate::component::{ComponentTypesBuilder, InterfaceType, MAX_FLAT_PARAMS, MAX_FLAT_RESULTS};
 use crate::fact::{AdapterOptions, Context, Options};
+use alloc::vec::Vec;
 use wasm_encoder::ValType;
 
 /// Metadata about a core wasm signature which is created for a component model
@@ -41,8 +42,10 @@ impl ComponentTypesBuilder {
         ) {
             Some(list) => list,
             None => {
+                let mut ret = Vec::new();
                 params_indirect = true;
-                vec![ptr_ty]
+                ret.push(ptr_ty);
+                ret
             }
         };
 
@@ -59,7 +62,11 @@ impl ComponentTypesBuilder {
                     // For a lifted function too-many-results gets translated to a
                     // returned pointer where results are read from. The callee
                     // allocates space here.
-                    Context::Lift => vec![ptr_ty],
+                    Context::Lift => {
+                        let mut ret = Vec::new();
+                        ret.push(ptr_ty);
+                        ret
+                    },
                     // For a lowered function too-many-results becomes a return
                     // pointer which is passed as the last argument. The caller
                     // allocates space here.

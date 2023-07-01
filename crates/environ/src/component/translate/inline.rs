@@ -48,6 +48,8 @@
 use crate::component::translate::adapt::{Adapter, AdapterOptions};
 use crate::component::translate::*;
 use crate::{EntityType, PrimaryMap};
+use alloc::slice;
+use alloc::string::{ToString, String};
 use indexmap::IndexMap;
 
 pub(super) fn run(
@@ -96,12 +98,13 @@ pub(super) fn run(
     // component.
     let index = RuntimeComponentInstanceIndex::from_u32(0);
     inliner.result.num_runtime_component_instances += 1;
-    let mut frames = vec![InlinerFrame::new(
+    let mut frames = Vec::new();
+    frames.push(InlinerFrame::new(
         index,
         result,
         ComponentClosure::default(),
         args,
-    )];
+    ));
     let exports = inliner.run(&mut frames)?;
     assert!(frames.is_empty());
 
@@ -157,7 +160,7 @@ struct InlinerFrame<'a> {
     instance: RuntimeComponentInstanceIndex,
 
     /// The remaining initializers to process when instantiating this component.
-    initializers: std::slice::Iter<'a, LocalInitializer<'a>>,
+    initializers: slice::Iter<'a, LocalInitializer<'a>>,
 
     /// The component being instantiated.
     translation: &'a Translation<'a>,

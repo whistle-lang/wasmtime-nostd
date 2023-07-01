@@ -13,10 +13,13 @@ edition.workspace = true
 [dependencies]
 anyhow = { workspace = true }
 cranelift-entity = { workspace = true }
-wasmtime-types = { workspace = true, default-features = false }
+wasmtime-types = { workspace = true}
+core2 = { workspace = true }
+hashbrown = { workspace = true }
 wasmparser = { workspace = true }
 indexmap = { version = "1.0.2", features = ["serde-1"] }
-thiserror = { workspace = true }
+thiserror = { workspace = true, optional = true }
+thiserror_core2 = { workspace = true }
 serde = { version = "1.0.94", features = ["derive"] }
 log = { workspace = true }
 gimli = { workspace = true, features = ["write"] }
@@ -37,6 +40,8 @@ name = "factc"
 required-features = ['component-model']
 
 [features]
+default = []
+std = ["thiserror"]
 component-model = [
   "dep:wasm-encoder",
   "dep:wasmprinter",

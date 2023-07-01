@@ -8,12 +8,14 @@ use crate::{
     TableInitialValue, Tunables, TypeConvert, TypeIndex, WasmError, WasmFuncType, WasmHeapType,
     WasmResult, WasmType,
 };
+use alloc::borrow::{ToOwned, Cow};
+use alloc::boxed::Box;
+use alloc::format;
+use alloc::string::{ToString, String};
+use alloc::sync::Arc;
+use alloc::vec::Vec;
 use cranelift_entity::packed_option::ReservedValue;
-use std::borrow::Cow;
-use std::collections::HashMap;
-use std::convert::TryFrom;
-use std::path::PathBuf;
-use std::sync::Arc;
+use hashbrown::HashMap;
 use wasmparser::{
     types::Types, CustomSectionReader, DataKind, ElementItems, ElementKind, Encoding, ExternalKind,
     FuncToValidate, FunctionBody, NameSectionReader, Naming, Operator, Parser, Payload, Type,
@@ -142,6 +144,7 @@ pub struct NameSection<'a> {
 #[derive(Debug, Default)]
 #[allow(missing_docs)]
 pub struct WasmFileInfo {
+    #[cfg(feature = "std")]
     pub path: Option<PathBuf>,
     pub code_section_offset: u64,
     pub imported_func_count: u32,

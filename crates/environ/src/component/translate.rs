@@ -4,10 +4,11 @@ use crate::{
     EntityIndex, ModuleEnvironment, ModuleTranslation, PrimaryMap, SignatureIndex, Tunables,
     TypeConvert,
 };
+use alloc::vec::Vec;
 use anyhow::{bail, Result};
 use indexmap::IndexMap;
-use std::collections::HashMap;
-use std::mem;
+use hashbrown::HashMap;
+use core::mem;
 use wasmparser::{Chunk, ComponentExternName, Encoding, Parser, Payload, Validator};
 
 mod adapt;

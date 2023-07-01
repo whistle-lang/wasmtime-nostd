@@ -1,13 +1,12 @@
 //! Data structures for representing decoded wasm modules.
 
+use core::{cmp, mem, ops::Range};
+
 use crate::{ModuleTranslation, PrimaryMap, Tunables, WasmHeapType, WASM_PAGE_SIZE};
+use alloc::{vec::Vec, boxed::Box, string::String, collections::BTreeMap};
 use cranelift_entity::{packed_option::ReservedValue, EntityRef};
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
-use std::collections::BTreeMap;
-use std::convert::TryFrom;
-use std::mem;
-use std::ops::Range;
 use wasmtime_types::*;
 
 /// Implementation styles for WebAssembly linear memory.
@@ -38,10 +37,10 @@ impl MemoryStyle {
         } else {
             crate::WASM32_MAX_PAGES
         };
-        let maximum = std::cmp::min(
+        let maximum = cmp::min(
             memory.maximum.unwrap_or(absolute_max_pages),
             if tunables.static_memory_bound_is_maximum {
-                std::cmp::min(tunables.static_memory_bound, absolute_max_pages)
+                cmp::min(tunables.static_memory_bound, absolute_max_pages)
             } else {
                 absolute_max_pages
             },
@@ -352,14 +351,18 @@ impl ModuleTranslation<'_> {
             // the front and back with extra zeros as necessary
             if offset % page_size != 0 {
                 let zero_padding = offset % page_size;
-                self.data.push(vec![0; zero_padding as usize].into());
+                let mut data = Vec::with_capacity(zero_padding as usize);
+                data.push(0);
+                self.data.push(data.into());
                 offset -= zero_padding;
                 len += zero_padding;
             }
             self.data.push(image.into());
             if len % page_size != 0 {
                 let zero_padding = page_size - (len % page_size);
-                self.data.push(vec![0; zero_padding as usize].into());
+                let mut data = Vec::with_capacity(zero_padding as usize);
+                data.push(0);
+                self.data.push(data.into());
                 len += zero_padding;
             }
 
@@ -420,8 +423,10 @@ impl ModuleTranslation<'_> {
                 continue;
             }
             if let TableInitialValue::FuncRef(val) = *init {
+                let mut data = Vec::with_capacity(table_size as usize);
+                data.push(val);
                 *init = TableInitialValue::Null {
-                    precomputed: vec![val; table_size as usize],
+                    precomputed: data,
                 };
             }
         }
