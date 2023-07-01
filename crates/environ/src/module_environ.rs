@@ -144,8 +144,8 @@ pub struct NameSection<'a> {
 #[derive(Debug, Default)]
 #[allow(missing_docs)]
 pub struct WasmFileInfo {
-    #[cfg(feature = "std")]
-    pub path: Option<PathBuf>,
+    // #[cfg(feature = "std")]
+    // pub path: Option<PathBuf>,
     pub code_section_offset: u64,
     pub imported_func_count: u32,
     pub funcs: Vec<FunctionMetadata>,
