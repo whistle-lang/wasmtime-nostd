@@ -46,6 +46,7 @@ serde_json = { workspace = true }
 wasmparser = { workspace = true }
 wasm-encoder = { workspace = true }
 
+
 [target.'cfg(unix)'.dependencies]
 rustix = { workspace = true, features = ["mm", "param"] }
 
@@ -199,10 +200,10 @@ rustix = "0.37.13"
 wit-bindgen = { version = "0.7.0", default-features = false }
 
 # wasm-tools family:
-wasmparser = { version= "0.107.0", default-features = false }
+wasmparser = { git = "https://github.com/whistle-lang/wasm-tools-nostd", branch="dev", default-features = false }
 wat = "1.0.66"
 wast = "60.0.0"
-wasmprinter = "0.2.59"
+wasmprinter = { git = "https://github.com/whistle-lang/wasm-tools-nostd", branch="dev" }
 wasm-encoder = "0.29.0"
 wasm-smith = "0.12.10"
 wasm-mutate = "0.2.27"

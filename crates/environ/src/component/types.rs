@@ -523,6 +523,7 @@ impl ComponentTypesBuilder {
                     let ty = self.core_outer_type(*count, TypeIndex::from_u32(*index));
                     self.push_core_typedef(ty);
                 }
+                _ => unimplemented!("module type {:?}", item),
             }
         }
 

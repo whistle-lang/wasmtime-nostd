@@ -73,6 +73,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "allocator-api2"
+version = "0.2.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "56fc6cf8dc8c4158eed8649f9b8b0ea1518eb62b544fe9490d66fa0b349eafe9"
+
+[[package]]
 name = "ambient-authority"
 version = "0.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -695,7 +701,7 @@ dependencies = [
  "target-lexicon",
  "thiserror",
  "toml",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wat",
 ]
 
@@ -871,7 +877,7 @@ dependencies = [
  "serde",
  "smallvec",
  "target-lexicon",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime-types",
  "wat",
 ]
@@ -1553,6 +1559,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "43a3c133739dddd0d2990f9a4bdf8eb4b21ef50e4851ca85ab661199821d510e"
 dependencies = [
  "ahash",
+]
+
+[[package]]
+name = "hashbrown"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2c6201b9ff9fd90a5a3bac2e56a830d0caa509576f0e503818ee82c181b3437a"
+dependencies = [
+ "ahash",
+ "allocator-api2",
 ]
 
 [[package]]
@@ -3722,7 +3738,7 @@ dependencies = [
  "indexmap",
  "serde",
  "wasm-encoder 0.29.0",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -3736,7 +3752,7 @@ dependencies = [
  "rand 0.8.5",
  "thiserror",
  "wasm-encoder 0.29.0",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -3750,7 +3766,7 @@ dependencies = [
  "indexmap",
  "leb128",
  "wasm-encoder 0.29.0",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -3811,6 +3827,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasmparser"
+version = "0.107.0"
+source = "git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev#00cce796d8901cc3e2ff56251b21f75fc497f920"
+dependencies = [
+ "hashbrown 0.14.0",
+ "indexmap",
+ "semver",
+]
+
+[[package]]
 name = "wasmparser-nostd"
 version = "0.91.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3822,11 +3848,11 @@ dependencies = [
 [[package]]
 name = "wasmprinter"
 version = "0.2.59"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc960b30b84abca377768f3c62cff3a1c74db8c0f6759ed581827da0bd3a3fed"
+source = "git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev#00cce796d8901cc3e2ff56251b21f75fc497f920"
 dependencies = [
  "anyhow",
- "wasmparser 0.107.0",
+ "hashbrown 0.14.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
 ]
 
 [[package]]
@@ -3853,7 +3879,7 @@ dependencies = [
  "target-lexicon",
  "tempfile",
  "wasi-cap-std-sync",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime-cache",
  "wasmtime-component-macro",
  "wasmtime-component-util",
@@ -3969,7 +3995,7 @@ dependencies = [
  "tokio",
  "walkdir",
  "wasm-encoder 0.29.0",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime",
  "wasmtime-cache",
  "wasmtime-cli-flags",
@@ -4037,7 +4063,7 @@ dependencies = [
  "object",
  "target-lexicon",
  "thiserror",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime-cranelift-shared",
  "wasmtime-environ",
 ]
@@ -4073,7 +4099,7 @@ dependencies = [
  "target-lexicon",
  "thiserror",
  "wasm-encoder 0.29.0",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmprinter",
  "wasmtime-component-util",
  "wasmtime-types",
@@ -4088,7 +4114,7 @@ dependencies = [
  "component-fuzz-util",
  "env_logger 0.10.0",
  "libfuzzer-sys",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmprinter",
  "wasmtime-environ",
  "wat",
@@ -4142,7 +4168,7 @@ dependencies = [
  "rand 0.8.5",
  "smallvec",
  "target-lexicon",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime",
  "wasmtime-fuzzing",
 ]
@@ -4167,7 +4193,7 @@ dependencies = [
  "wasm-smith",
  "wasm-spec-interpreter",
  "wasmi",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmprinter",
  "wasmtime",
  "wasmtime-wast",
@@ -4251,7 +4277,7 @@ dependencies = [
  "serde",
  "thiserror",
  "thiserror_core2",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
 ]
 
 [[package]]
@@ -4350,7 +4376,7 @@ dependencies = [
  "gimli",
  "object",
  "target-lexicon",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime-cranelift-shared",
  "wasmtime-environ",
  "winch-codegen",
@@ -4520,7 +4546,7 @@ dependencies = [
  "regalloc2",
  "smallvec",
  "target-lexicon",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime-environ",
 ]
 
@@ -4564,7 +4590,7 @@ dependencies = [
  "similar",
  "target-lexicon",
  "toml",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (git+https://github.com/whistle-lang/wasm-tools-nostd?branch=dev)",
  "wasmtime-environ",
  "wat",
  "winch-codegen",
@@ -4785,7 +4811,7 @@ dependencies = [
  "log",
  "wasm-encoder 0.29.0",
  "wasm-metadata",
- "wasmparser 0.107.0",
+ "wasmparser 0.107.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "wit-parser",
 ]
 

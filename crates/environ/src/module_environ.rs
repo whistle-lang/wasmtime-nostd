@@ -246,6 +246,9 @@ impl<'a, 'data> ModuleEnvironment<'a, 'data> {
                         Type::Array(_) => {
                             unimplemented!("gc proposal")
                         }
+                        Type::Struct(_) => {
+                            unimplemented!("gc proposal")
+                        }
                     }
                 }
             }

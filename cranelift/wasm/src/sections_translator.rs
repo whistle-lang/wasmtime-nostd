@@ -59,6 +59,9 @@ pub fn parse_type_section<'a>(
             Type::Array(_) => {
                 unimplemented!("gc proposal");
             }
+            Type::Struct(_) => {
+                unimplemented!("gc proposal");
+            }
         }
     }
     Ok(())
